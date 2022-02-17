@@ -394,6 +394,38 @@ main {
     }
 }
 
+//MODAL
+.modal {
+    background-color: #efefef;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 320px;
+    height: 100vh;
+    padding: 70px 15px;
+    &__content {
+        position: relative;
+    }
+    &__title {
+        margin-bottom: 15px;
+    }
+    &__item {
+        margin: 8px 0;
+
+    }
+    &__close {
+        background-color: #f8f8f8;
+        border-radius: 5px;
+        border: 0.1rem solid #a4a4a4;
+        font-size: 16px;
+        padding: 0.1rem .5rem;
+        position: absolute;
+        right: 16px;
+        top: 0px;
+        cursor: pointer;
+    }
+}
+
 
 // FOOTER
 .footer {
