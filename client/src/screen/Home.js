@@ -1,12 +1,17 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 const Home = () => {
   return (
       <div class="products">
           <div class="card products__item">
-              <img src="img/pants-man1.jpg" class="card__img-top" alt="man" />
+              <Link to="/detail/1234">
+                  <img src="img/pants-man1.jpg" class="card__img-top" alt="man" />
+              </Link>
               <div class="card__body">
-                  <h5 class="card__title">Card title</h5>
+                  <Link to="/detail/1234" class="card__title">
+                      Card title
+                  </Link>
                   <div class="card__review">
                       <span>
                           <i class="fa-solid fa-star"></i>
@@ -78,7 +83,9 @@ const Home = () => {
           <div class="card products__item">
               <img src="img/pant-woman1.jpg" class="card__img-top" alt="man" />
               <div class="card__body">
-                  <h5 class="card__title">Card title</h5>
+                  <Link to="/categorie" class="card__title">
+                      Card title
+                  </Link>
                   <div class="card__review">
                       <span>
                           <i class="fa-solid fa-star"></i>
