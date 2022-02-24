@@ -18,7 +18,7 @@ const Header = ({ setSideToggle }) => {
                                 placeholder="Search Your Products"
                             />
                             <button className="header__submit">
-                                <i className="fa-solid fa-magnifying-glass"></i>
+                                <i className="fa fa-search"></i>
                             </button>
                         </form>
                         <ul className="header__right">
@@ -29,7 +29,7 @@ const Header = ({ setSideToggle }) => {
                             </li>
                             <li className="header__icons">
                                 <NavLink to="/cart" className="header__cart active">
-                                    <i className="fa-solid fa-cart-shopping"></i>
+                                    <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                                     <span className="header__cart-text">Card</span>
                                     <span className="header__cart-badge">12</span>
                                 </NavLink>
@@ -41,7 +41,7 @@ const Header = ({ setSideToggle }) => {
             </div>
             <div className="nav header__nav">
                 <span className="nav__link nav__link--all" onClick={() => setSideToggle(true)}>
-                    <i className="nav__link-icon fa-solid fa-bars"></i>all
+                    <i className="nav__link-icon fa fa-bars"></i>all
                 </span>
                 <a href="/" className="nav__link">
                     mobiles

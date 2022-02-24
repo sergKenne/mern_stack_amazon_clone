@@ -41,7 +41,7 @@ const Modal = ({setSideToggle, sideToggle}) => {
                   </li>
               </ul>
               <span className="modal__close" onClick={() => setSideToggle(false)}>
-                  <i className="fa-solid fa-xmark"></i>
+                  <i className="fa fa-close"></i>
               </span>
           </div>
       </div>

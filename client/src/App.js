@@ -18,7 +18,7 @@ function App() {
               <div className="container">
                   <Routes>
                       <Route path="/" element={<Home />} />
-                      <Route path="/detail/:id" element={<Detail/>} />
+                      <Route path="/:id" element={<Detail/>} />
                       <Route path="/categorie" element={<Categorie/>} />
                       <Route path="/cart" element={<Cart/>} />
                       <Route  element={<Error/>} />
