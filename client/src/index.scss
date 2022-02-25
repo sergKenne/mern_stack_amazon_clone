@@ -280,13 +280,13 @@ a {
         object-fit: cover;
     }
     &__body {
-        padding: 4px;
+        padding: 10px;
     }
     &__title {
         color: #0000ee;
         font-size: 18px;
         font-weight: 600;
-        padding: 12px 0;
+        padding: 18px 0;
     }
     &__review {
         margin-bottom: 6px;
@@ -304,9 +304,11 @@ a {
 //DETAIL
 .detail {
     &__go-back {
-        margin: 10px 0;
         cursor: pointer;
-        color: #55a;
+        color: #676796;
+        margin: 10px 0;
+        display: inline-block;
+        font-weight: bold;
     }
     &__content {
         display: flex;
@@ -356,6 +358,7 @@ a {
     }
     &__select {
         padding: 5px;
+        font-size: 17px;
     }
     &__btn {
         background-color: #f0c040;
@@ -366,6 +369,12 @@ a {
         border: 0.1rem solid #a4a4a4;
         font-size: 18px;
         margin-top: 16px;
+        cursor: pointer;
+        &--inactive {
+            background-color: #a4a4a4;
+            color: #131921;
+            border: 1px solid #131921
+        }
     }
 }
 

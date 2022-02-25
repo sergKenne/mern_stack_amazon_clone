@@ -24,7 +24,7 @@ const Home = (props) => {
                         </Link>
                         <div className="card__body">
                             <Link to={`/${prod._id}`} className="card__title">
-                                Card title
+                                {prod.name}
                             </Link>
                             <div className="card__review">
                                 <Rating rating={prod.rating} numReviews={prod.numReviews} />

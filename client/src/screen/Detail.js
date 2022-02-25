@@ -1,22 +1,36 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 
 import fecthDetailProduct from '../redux/detail/action';
 import Rating from '../components/Rating';
+import { addToCart } from '../redux/carts/action';
 
 const Detail = (props) => {
+    const [qty, setQty] = useState(1)
     const { id } = useParams()
+    const navigate = useNavigate()
+    console.log("Qty:", qty);
     
     const { error, product, loading } = props.product
-    console.log(product);
+    //console.log(props.history);
     useEffect(() => {
         props.getProductDetail(id)
-    },[])
+    }, [])
+    
+    const handleChange = (e) => {
+        setQty(e.target.value)
+    }
+
+    const addProductTocart = () => {
+
+        props.addProduct({ ...product, qty })
+        navigate("/cart")
+    }
 
     return (
         <div className="detail">
-            <h4 className="detail__go-back">Back to result</h4>
+            <Link className="detail__go-back" to="/">Back to result</Link>
             <div className="detail__content">
                 <div className="detail__picture">
                     <img className="detail__img" src={product.image} alt="" />
@@ -31,7 +45,7 @@ const Detail = (props) => {
                     <div className="detail__item">{product.description}</div>
                 </div>
                 <div className="detail__right">
-                    <h4 className="detail__title">{ product.brand }</h4>
+                    <h4 className="detail__title">{product.brand}</h4>
                     <div className="detail__item">
                         <Rating rating={product.rating} numReviews={product.numReviews} />
                     </div>
@@ -42,28 +56,38 @@ const Detail = (props) => {
                     <div className="detail__item detail__item--flex">
                         <span>Status</span>
                         {product.countInStock ? (
-                            <span style={{ color: 'green', 'font-weight': 'bold' }}>In Stock</span>
+                            <span style={{ color: 'green', fontWeight: 'bold' }}>In Stock</span>
                         ) : (
-                            <span style={{ color: 'red', 'font-weight': 'bold' }}>Unavailable</span>
+                            <span style={{ color: 'red', fontWeight: 'bold' }}>Unavailable</span>
                         )}
                     </div>
                     <div className="detail__item detail__item--flex">
                         <span>Qty</span>
-                        <select className="detail__select" name="" id="">
-                            {[...Array(product.countInStock).keys()].map((item) => {
-                                return (
-                                    <option key={item} value={item + 1}>
-                                        {item + 1}
-                                    </option>
-                                );
-                            })}
-
-                            {/* <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option> */}
-                        </select>
+                        {product.countInStock > 0 ? (
+                            <select
+                                className="detail__select"
+                                name=""
+                                id=""
+                                onChange={handleChange}>
+                                {[...Array(product.countInStock).keys()].map((item) => {
+                                    return (
+                                        <option key={item} value={item + 1}>
+                                            {item + 1}
+                                        </option>
+                                    );
+                                })}
+                            </select>
+                        ) : (
+                            <span style={{ fontWeight: 'bold', fontSize: '18px' }}>0</span>
+                        )}
                     </div>
-                    <button className="detail__btn">Add To Cart</button>
+                    {product.countInStock ? (
+                        <button className="detail__btn" onClick={addProductTocart}>
+                            Add To Cart
+                        </button>
+                    ) : (
+                        <button className="detail__btn detail__btn--inactive">Add To Cart</button>
+                    )}
                 </div>
             </div>
         </div>
@@ -75,7 +99,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getProductDetail: (id) => dispatch(fecthDetailProduct(id))
+    getProductDetail: (id) => dispatch(fecthDetailProduct(id)),
+    addProduct: (prod) => dispatch(addToCart(prod))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (Detail)

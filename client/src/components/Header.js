@@ -1,7 +1,10 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 const Header = ({ setSideToggle }) => {
+
+    const {cart} = useSelector(state => state.cart) 
 
     return (
         <div className="header">
@@ -31,7 +34,7 @@ const Header = ({ setSideToggle }) => {
                                 <NavLink to="/cart" className="header__cart active">
                                     <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                                     <span className="header__cart-text">Card</span>
-                                    <span className="header__cart-badge">12</span>
+                                    <span className="header__cart-badge">{ cart.length}</span>
                                 </NavLink>
                             </li>
                             <li className="header__icons header__icons--avatar">S</li>

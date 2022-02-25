@@ -1,47 +1,45 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+
 
 const Cart = () => {
+
+    const { cart } = useSelector(state => state.cart)
+    console.log("cart", cart);
+
+
   return (
-    <>
-        <h3 class="main__title">shopping card</h3> 
-        <div class="shop-cart">
-            <div class="shop-cart__left">
-                <div class="shop-cart__item">
-                    <img src="img/pants-man1.jpg" alt="" class="shop-cart__img"/>
-                    <p class="shop-cart__description">Puma Slim Pant</p>
-                    <select name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                    </select>
-                    <p class="shop-cart__price">
-                        65$
-                    </p>
-                    <button class="shop-cart__btn">Delete</button>
-                </div>
-                <div class="shop-cart__item">
-                    <img src="img/pants-man1.jpg" alt="" class="shop-cart__img"/>
-                    <p class="shop-cart__description">Puma Slim Pant</p>
-                    <select name="" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                    </select>
-                    <p class="shop-cart__price">
-                        65$
-                    </p>
-                    <button class="shop-cart__btn">Delete</button>
-                </div>
-            </div>
-            <div class="shop-cart__right">
-                <div class="detail__right detail__right--cart">
-                    <h4 class="detail__title">subtotal(1 item): 65$</h4>
-                    <button class="detail__btn">Proceed to Checkout</button>
-                </div>
-            </div>
-        </div>
-    </>
-  )
+      <>
+          <h3 className="main__title">shopping card</h3>
+          <div className="shop-cart">
+              <div className="shop-cart__left">
+                  {cart.map((item) => (
+                      <div className="shop-cart__item" key={item._id}>
+                          <img src={item.image} alt="" className="shop-cart__img" />
+                          <p className="shop-cart__description">{item.name}</p>
+                          {item.countInStock && <select className="detail__select" name="" id="">
+                              {[...Array(item.countInStock).keys()].map((item) => {
+                                  return (
+                                      <option key={item} value={item + 1}>
+                                          {item + 1}
+                                      </option>
+                                  );
+                              })}
+                          </select>}
+                          <p className="shop-cart__price">${item.price}</p>
+                          <button className="shop-cart__btn">Delete</button>
+                      </div>
+                  ))}
+              </div>
+              <div className="shop-cart__right">
+                  <div className="detail__right detail__right--cart">
+                      <h4 className="detail__title">subtotal(1 item): 65$</h4>
+                      <button className="detail__btn">Proceed to Checkout</button>
+                  </div>
+              </div>
+          </div>
+      </>
+  );
 }
 
 export default Cart
