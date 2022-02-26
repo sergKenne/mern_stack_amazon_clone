@@ -1,13 +1,20 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-
+import React, { useEffect, useState} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { deleteToCart } from '../redux/carts/action';
+import { GET_TOTAL_ITEMS, GET_TOTAL_PRICE } from '../redux/carts/type';
+import { addToCart } from '../redux/carts/action';
 
 const Cart = () => {
 
-    const { cart } = useSelector(state => state.cart)
-    console.log("cart", cart);
+    const [qty, setQty] = useState(null);
+    const { cart, total, totalItems } = useSelector(state => state.cart)
+    const dispatch = useDispatch()
 
-
+    useEffect(() => {
+        dispatch({ type: GET_TOTAL_PRICE });
+        dispatch({ type: GET_TOTAL_ITEMS });
+    }, [dispatch,cart, qty]);
+    
   return (
       <>
           <h3 className="main__title">shopping card</h3>
@@ -17,23 +24,39 @@ const Cart = () => {
                       <div className="shop-cart__item" key={item._id}>
                           <img src={item.image} alt="" className="shop-cart__img" />
                           <p className="shop-cart__description">{item.name}</p>
-                          {item.countInStock && <select className="detail__select" name="" id="">
-                              {[...Array(item.countInStock).keys()].map((item) => {
-                                  return (
-                                      <option key={item} value={item + 1}>
-                                          {item + 1}
-                                      </option>
-                                  );
-                              })}
-                          </select>}
+                          {item.countInStock && (
+                              <select
+                                  className="detail__select"
+                                  onChange={(e) => {
+                                      setQty(e.target.value)
+                                      dispatch(addToCart(item, Number(e.target.value)))
+                                  }}>
+                                  <option value={item.qty} disabled selected hidden>
+                                      {item.qty}
+                                  </option>
+                                  {[...Array(item.countInStock).keys()].map((item) => {
+                                      return (
+                                          <option key={item} value={item + 1}>
+                                              {item + 1}
+                                          </option>
+                                      );
+                                  })}
+                              </select>
+                          )}
                           <p className="shop-cart__price">${item.price}</p>
-                          <button className="shop-cart__btn">Delete</button>
+                          <button
+                              className="shop-cart__btn"
+                              onClick={() => dispatch(deleteToCart(item._id))}>
+                              Delete
+                          </button>
                       </div>
                   ))}
               </div>
               <div className="shop-cart__right">
                   <div className="detail__right detail__right--cart">
-                      <h4 className="detail__title">subtotal(1 item): 65$</h4>
+                      <h4 className="detail__title">
+                          subtotal({totalItems} item): ${total}
+                      </h4>
                       <button className="detail__btn">Proceed to Checkout</button>
                   </div>
               </div>

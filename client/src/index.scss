@@ -177,7 +177,7 @@ a {
         font-size: 13px;
         border-radius: 50%;
         top: 1px;
-        left: 25px;
+        left: 20px;
         
     }
 }
@@ -249,6 +249,8 @@ a {
     }
     &__left-item {
         margin-bottom: 6px;
+        font-size: 18px;
+        font-weight: 500;
         i {
             color: #f0c040;
         }
@@ -407,7 +409,8 @@ a {
         padding: 8px;
     }
     &__btn {
-        padding: 6px;
+        cursor: pointer;
+        padding: 6px 10px;
         border-radius: 0.4rem;
         border: 0.1rem solid #a4a4a4;
         font-size: 14px;

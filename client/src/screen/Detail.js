@@ -13,7 +13,7 @@ const Detail = (props) => {
     console.log("Qty:", qty);
     
     const { error, product, loading } = props.product
-    //console.log(props.history);
+   
     useEffect(() => {
         props.getProductDetail(id)
     }, [])
@@ -23,8 +23,7 @@ const Detail = (props) => {
     }
 
     const addProductTocart = () => {
-
-        props.addProduct({ ...product, qty })
+        props.addProduct(product, qty)
         navigate("/cart")
     }
 
@@ -51,7 +50,7 @@ const Detail = (props) => {
                     </div>
                     <div className="detail__item detail__item--flex">
                         <span>Price</span>
-                        <span>${product.price}</span>
+                        <span>${product.price*qty}</span>
                     </div>
                     <div className="detail__item detail__item--flex">
                         <span>Status</span>
@@ -100,7 +99,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     getProductDetail: (id) => dispatch(fecthDetailProduct(id)),
-    addProduct: (prod) => dispatch(addToCart(prod))
+    addProduct: (prod, qty) => dispatch(addToCart(prod, qty))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (Detail)
