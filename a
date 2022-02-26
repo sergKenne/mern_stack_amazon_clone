@@ -1,0 +1,65 @@
+[33mcommit a88c98b978b01066d491a315f892638d9ccb941b[m[33m ([m[1;36mHEAD -> [m[1;32mcategory[m[33m, [m[1;31morigin/redux[m[33m, [m[1;32mredux[m[33m, [m[1;32mclient[m[33m)[m
+Author: Serge Simplice Kenne <kenne_serge@mail.ru>
+Date:   Sat Feb 26 04:28:41 2022 +0300
+
+    завершения cart reducer
+
+[33mcommit 3c0bd2eb7b5f88aace789e0502a35d103bcc233c[m
+Author: Serge Simplice Kenne <kenne_serge@mail.ru>
+Date:   Fri Feb 25 16:38:12 2022 +0300
+
+    add to cart reducer выполнен
+
+[33mcommit 35f9c3ee5810c202854746c58427dbd9b56e04e3[m
+Author: Serge Simplice Kenne <kenne_serge@mail.ru>
+Date:   Fri Feb 25 01:06:44 2022 +0300
+
+    выполнен reducer для получения одного продукта
+
+[33mcommit 6e442cb59916f05f5f046cfe1420180fbafb9ca2[m
+Author: Serge Simplice Kenne <kenne_serge@mail.ru>
+Date:   Tue Feb 22 03:40:20 2022 +0300
+
+    выполнен редюсер для продуктов
+
+[33mcommit 0da7a7a6807283c018539637420e387201811248[m[33m ([m[1;31morigin/server[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/client[m[33m, [m[1;32mserver[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Serge Simplice Kenne <kenne_serge@mail.ru>
+Date:   Mon Feb 21 23:33:33 2022 +0300
+
+    создание серверная часть
+
+[33mcommit ae185589010f6c5d0472188d83e557b163bc2951[m
+Author: Serge Simplice Kenne <kenne_serge@mail.ru>
+Date:   Mon Feb 21 18:27:43 2022 +0300
+
+    home screen
+
+[33mcommit e52e3614781177fee99b66f1017c56398b878c32[m
+Author: Serge Simplice Kenne <kenne_serge@mail.ru>
+Date:   Fri Feb 18 02:09:44 2022 +0300
+
+    преобразование static html страницы в react приложения
+
+[33mcommit 5f3d9864cae04bf5f7c1dc70e1b1d824ed9da4ad[m[33m ([m[1;31morigin/static-website[m[33m, [m[1;32mstatic-website[m[33m)[m
+Author: Serge Simplice Kenne <kenne_serge@mail.ru>
+Date:   Thu Feb 17 22:06:05 2022 +0300
+
+    завершение верстку страницы
+
+[33mcommit f0b49320e9ba42d9e01cad39e0eaca4858fd6464[m
+Author: Serge Simplice Kenne <kenne_serge@mail.ru>
+Date:   Thu Feb 17 02:11:24 2022 +0300
+
+    верстка блог страницы detail and cart
+
+[33mcommit 56c635d22f978259505ed465c0501e93b1afe042[m
+Author: Serge Simplice Kenne <kenne_serge@mail.ru>
+Date:   Wed Feb 16 00:53:56 2022 +0300
+
+    верстка header и footer главной страницы
+
+[33mcommit 4fe8ed83bedf0f075f10e706cc94d70bb60d8e56[m
+Author: Serge Simplice Kenne <kenne_serge@mail.ru>
+Date:   Tue Feb 15 18:14:33 2022 +0300
+
+    first commit

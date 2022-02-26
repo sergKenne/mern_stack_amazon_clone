@@ -10,12 +10,8 @@ const productRouter = require('./routes/product')
 
 connectDB()
 
-
-app.use("/api", productRouter)
-
-
-
-
-app.listen('5000', () => {
+app.use("/api/products", productRouter)
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
     console.log('server running in port 5000');
 });

@@ -1,6 +1,32 @@
-import React from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect} from 'react'
+import { useSelector, dispatch, useDispatch } from 'react-redux';
+import { Link, useParams, } from 'react-router-dom';
+import Rating from '../components/Rating';
+import getProductByCategorie from '../redux/categorie/action';
 
-const Categorie = () => {
+
+const Categorie = (props) => {
+    //const { products } = useSelector((state) => state.products);
+    const { categorie, loading, error } = useSelector(state => state.categorie)
+    const dispatch = useDispatch() 
+    const { name } = useParams()
+  
+    const products = JSON.parse(localStorage.getItem("products")) 
+    
+    console.log("category:", categorie);
+    console.log("name:", name);
+    const filterByCategory = (cat) => {
+        //setSideToggle(false);
+        dispatch(getProductByCategorie(cat)) 
+
+    }
+   
+    useEffect(() => {
+        dispatch(getProductByCategorie(name))
+    },[name])
+   
+
   return (
       <>
           <div className="main__search">
@@ -21,16 +47,19 @@ const Categorie = () => {
                   <div className="main__left">
                       <h4 className="main__left-title">Department</h4>
                       <div className="main__left-list">
-                          <a href="/" className="main__left-item">
-                              Any
-                          </a>
-                          <a href="/" className="main__left-item">
-                              Pants
-                          </a>
-                          <a href="/" className="main__left-item">
-                              Shirts
-                          </a>
+                          {['Any', ...new Set(products.map((el) => el.category))].map((cat) => (
+                              <Link
+                                  to={`/search/categorie/${cat}`}
+                                  className="main__left-item"
+                                  style={cat === name ? { color: 'red', fontWeight: 'bold' } : {}}
+                                  key={cat}
+                                  onClick={ ()=> getProductByCategorie(cat)}
+                              >
+                                {cat}
+                              </Link>
+                          ))}
                       </div>
+                      <br />
                       <h4 className="main__left-title">Price</h4>
                       <div className="main__left-list">
                           <a href="/" className="main__left-item">
@@ -96,96 +125,28 @@ const Categorie = () => {
                   </div>
                   <div className="main__right">
                       <div className="products">
-                          <div className="card products__item">
-                              <img src="img/pants-man1.jpg" className="card__img-top" alt="" />
-                              <div className="card__body">
-                                  <h5 className="card__title">Card title</h5>
-                                  <div className="card__review">
-                                      <span>
-                                          <i className="fa-solid fa-star"></i>
-                                          <i className="fa-solid fa-star"></i>
-                                          <i className="fa-solid fa-star"></i>
-                                          <i className="fa-solid fa-star-half-stroke"></i>4 reviews
-                                      </span>
-                                  </div>
-                                  <div className="card__footer">
-                                      <span className="card__price">$ 200</span>
-                                      <span className="card__brand">Puma</span>
-                                  </div>
-                              </div>
-                          </div>
-                          <div className="card products__item">
-                              <img src="img/pant-woman1.jpg" className="card__img-top" alt="" />
-                              <div className="card__body">
-                                  <h5 className="card__title">Card title</h5>
-                                  <div className="card__review">
-                                      <span>
-                                          <i className="fa-solid fa-star"></i>
-                                          <i className="fa-solid fa-star"></i>
-                                          <i className="fa-solid fa-star"></i>
-                                          <i className="fa-solid fa-star-half-stroke"></i>4 reviews
-                                      </span>
-                                  </div>
-                                  <div className="card__footer">
-                                      <span className="card__price">$ 200</span>
-                                      <span className="card__brand">Puma</span>
+                          {categorie.map((prod) => (
+                              <div className="card products__item" key={prod._id}>
+                                  <Link to={`/product/${prod._id}`} className="card__title">
+                                      <img src={prod.image} className="card__img-top" alt="man" />
+                                  </Link>
+                                  <div className="card__body">
+                                      <Link to={`/product/${prod._id}`} className="card__title">
+                                          {prod.name}
+                                      </Link>
+                                      <div className="card__review">
+                                          <Rating
+                                              rating={prod.rating}
+                                              numReviews={prod.numReviews}
+                                          />
+                                      </div>
+                                      <div className="card__footer">
+                                          <span className="card__price">$ {prod.price}</span>
+                                          <span className="card__brand">{prod.brand}</span>
+                                      </div>
                                   </div>
                               </div>
-                          </div>
-                          <div className="card products__item">
-                              <img src="img/pants-woman2.jpg" className="card__img-top" alt="" />
-                              <div className="card__body">
-                                  <h5 className="card__title">Card title</h5>
-                                  <div className="card__review">
-                                      <span>
-                                          <i className="fa-solid fa-star"></i>
-                                          <i className="fa-solid fa-star"></i>
-                                          <i className="fa-solid fa-star"></i>
-                                          <i className="fa-solid fa-star-half-stroke"></i>4 reviews
-                                      </span>
-                                  </div>
-                                  <div className="card__footer">
-                                      <span className="card__price">$ 200</span>
-                                      <span className="card__brand">Puma</span>
-                                  </div>
-                              </div>
-                          </div>
-                          <div className="card products__item">
-                              <img src="img/pants-man1.jpg" className="card__img-top" alt="" />
-                              <div className="card__body">
-                                  <h5 className="card__title">Card title</h5>
-                                  <div className="card__review">
-                                      <span>
-                                          <i className="fa-solid fa-star"></i>
-                                          <i className="fa-solid fa-star"></i>
-                                          <i className="fa-solid fa-star"></i>
-                                          <i className="fa-solid fa-star-half-stroke"></i>4 reviews
-                                      </span>
-                                  </div>
-                                  <div className="card__footer">
-                                      <span className="card__price">$ 200</span>
-                                      <span className="card__brand">Puma</span>
-                                  </div>
-                              </div>
-                          </div>
-                          <div className="card products__item">
-                              <img src="img/pants-woman2.jpg" className="card__img-top" alt="" />
-                              <div className="card__body">
-                                  <h5 className="card__title">Card title</h5>
-                                  <div className="card__review">
-                                      <span>
-                                          <i className="fa-solid fa-star"></i>
-                                          <i className="fa-solid fa-star"></i>
-                                          <i className="fa-solid fa-star"></i>
-                                          <i className="fa-solid fa-star-half-stroke"></i>4 reviews
-                                      </span>
-                                  </div>
-                                  <div className="card__footer">
-                                      <span className="card__price">$ 200</span>
-                                      <span className="card__brand">Puma</span>
-                                  </div>
-                              </div>
-                          </div>
+                          ))}
                       </div>
                   </div>
               </div>

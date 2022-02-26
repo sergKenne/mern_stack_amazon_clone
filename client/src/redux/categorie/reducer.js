@@ -2,10 +2,10 @@
 import { PRODUCT_CATEGORIE_ERROR, PRODUCT_CATEGORIE_REQUEST, PRODUCT_CATEGORIE_SUCCESS } from "./type"
 
 const initialState = {
-    categorie: [],
+    categorie: JSON.parse(localStorage.getItem('productByCategory')) || [],
     loading: false,
-    error: ""
-}
+    error: '',
+};
 
 const categorieReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -16,12 +16,14 @@ const categorieReducer = (state = initialState, action) => {
             }
         case PRODUCT_CATEGORIE_SUCCESS:
             return {
+                ...state,
                 loading: false,
                 categorie: action.payload
             }
         case PRODUCT_CATEGORIE_ERROR:
             return {
                 ...state,
+                loading: false,
                 error: action.payload
             }
         default:

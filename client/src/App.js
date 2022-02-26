@@ -17,9 +17,9 @@ function App() {
           <div className="main">
               <div className="container">
                   <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route path="/:id" element={<Detail/>} />
-                      <Route path="/categorie" element={<Categorie/>} />
+                      <Route exact path="/" element={<Home />}  />
+                      <Route path="product/:id" element={<Detail/>} />
+                      <Route path="/search/categorie/:name" element={<Categorie/>} />
                       <Route path="/cart" element={<Cart/>} />
                       <Route  element={<Error/>} />
                   </Routes>

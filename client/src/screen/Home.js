@@ -19,21 +19,15 @@ const Home = (props) => {
             {products.length > 0 &&
                 products.map((prod) => (
                     <div className="card products__item" key={prod._id}>
-                        <Link to={`/${prod._id}`}>
+                        <Link to={`product/${prod._id}`}>
                             <img src={prod.image} className="card__img-top" alt="man" />
                         </Link>
                         <div className="card__body">
-                            <Link to={`/${prod._id}`} className="card__title">
+                            <Link to={`product/${prod._id}`} className="card__title">
                                 {prod.name}
                             </Link>
                             <div className="card__review">
                                 <Rating rating={prod.rating} numReviews={prod.numReviews} />
-                                {/* <span>
-                                <i className="fa-solid fa-star"></i>
-                                <i className="fa-solid fa-star"></i>
-                                <i className="fa-solid fa-star"></i>
-                                <i className="fa-solid fa-star-half-stroke"></i>4 reviews
-                            </span> */}
                             </div>
                             <div className="card__footer">
                                 <span className="card__price">$ {prod.price}</span>
