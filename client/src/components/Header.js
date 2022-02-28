@@ -2,6 +2,9 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
+import logo from "../img/logo.png"
+import navLogo from "../img/nav.jpg"
+
 const Header = ({ setSideToggle }) => {
 
     const {cart} = useSelector(state => state.cart) 
@@ -12,7 +15,7 @@ const Header = ({ setSideToggle }) => {
                 <div className="container">
                     <div className="header__wrap-top">
                         <NavLink to="/" className="header__logo">
-                            <img className="header__img" src="img/logo.png" alt="logo" />
+                            <img className="header__img" src={logo} alt="logo" />
                         </NavLink>
                         <form action="" className="header__form">
                             <input
@@ -44,7 +47,8 @@ const Header = ({ setSideToggle }) => {
             </div>
             <div className="nav header__nav">
                 <span className="nav__link nav__link--all" onClick={() => setSideToggle(true)}>
-                    <i className="nav__link-icon fa fa-bars"></i>all
+                    <i className="nav__link-icon fa fa-bars"></i>
+                    {/* <span>all</span>  */}
                 </span>
                 <a href="/" className="nav__link">
                     mobiles
@@ -71,7 +75,7 @@ const Header = ({ setSideToggle }) => {
                     amazon play
                 </a>
                 <a href="/" className="nav__link nav__link--img">
-                    <img src="img/nav.jpg" alt="nav" />
+                    <img src={navLogo} alt="nav" />
                 </a>
             </div>
         </div>

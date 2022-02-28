@@ -8,11 +8,13 @@ import productReducer from './product/reducer'
 
 
 
+
 const reducers = combineReducers({
     products: productReducer,
     detail: detailReducer,
     cart: cartReducer,
-    categorie: categorieReducer
+    categorie: categorieReducer,
+    
 })
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));

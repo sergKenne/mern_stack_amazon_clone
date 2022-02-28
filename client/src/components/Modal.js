@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import getProductByCategorie from '../redux/categorie/action';
+import { getProductByCategorie } from '../redux/categorie/action';
+
 
 const Modal = ({ setSideToggle, sideToggle }) => {
-    const { products } = useSelector(state => state.products)
+    //const { products } = useSelector((state) => state.products)
+    let products = JSON.parse(localStorage.getItem('products'));
     const dispatch = useDispatch()
 
     const filterByCategory = (cat) => {

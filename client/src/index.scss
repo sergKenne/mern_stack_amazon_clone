@@ -184,7 +184,7 @@ a {
 
 .nav {
     display: flex;
-    height: 38px;
+    height: 42px;
     padding-right: 400px;
     justify-content: space-around;
     align-items: center;
@@ -194,19 +194,36 @@ a {
         font-weight: 500;
         font-size: 14px;
         text-transform: capitalize;
+        padding: 3px 6px;
+
+        &:hover {
+            border: 1px solid #ffffff;
+        }
+
         &--img {
             position: absolute;
             right: 0;
             top: 0;
+            border: none;
+            &:hover {
+                border: none;
+            }
         }
         &--all {
             cursor: pointer;
+            // display: flex;
+            // align-items: center;
+            border: 1px solid rgba(255,255,255, .4);
+            
         }
+        
     }
     &__link-icon {
-        padding-right: 4px;
+        //padding-right: 4px;
         top: 0;
         right: 0;
+        font-size: 1.8rem;
+        
     }
    
 }
@@ -252,6 +269,7 @@ a {
         margin-bottom: 6px;
         font-size: 18px;
         font-weight: 500;
+        cursor: pointer;
         i {
             color: #f0c040;
         }
