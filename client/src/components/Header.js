@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
 import logo from "../img/logo.png"
@@ -29,9 +29,9 @@ const Header = ({ setSideToggle }) => {
                         </form>
                         <ul className="header__right">
                             <li className="header__icons">
-                                <a href="/" className="header__sign active">
+                                <Link to="/signin" className="header__sign active">
                                     sign in
-                                </a>
+                                </Link>
                             </li>
                             <li className="header__icons">
                                 <NavLink to="/cart" className="header__cart active">
@@ -50,7 +50,7 @@ const Header = ({ setSideToggle }) => {
                     <i className="nav__link-icon fa fa-bars"></i>
                     {/* <span>all</span>  */}
                 </span>
-                <a href="/" className="nav__link">
+                {/* <a href="/" className="nav__link">
                     mobiles
                 </a>
                 <a href="/" className="nav__link">
@@ -73,7 +73,7 @@ const Header = ({ setSideToggle }) => {
                 </a>
                 <a href="/" className="nav__link">
                     amazon play
-                </a>
+                </a> */}
                 <a href="/" className="nav__link nav__link--img">
                     <img src={navLogo} alt="nav" />
                 </a>

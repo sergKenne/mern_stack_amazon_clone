@@ -1,10 +1,12 @@
 /* eslint-disable default-case */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
-import { useSelector, dispatch, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Rating from '../components/Rating';
+import RatingFilter from '../components/RatingFilter';
 import {
+    filterByRating,
     getProductAsc,
     getProductByCategorie,
     getProductDesc,
@@ -14,10 +16,10 @@ import {
 
 const Categorie = (props) => {
     const { categorie, loading, error } = useSelector((state) => state.categorie);
+    const { products } = useSelector((state) => state.products);
     const dispatch = useDispatch();
     const { name } = useParams();
-    const products = JSON.parse(localStorage.getItem('products'));
-
+    
     const sortByCategory = (sortName) => {
         switch (sortName) {
             case 'desc':
@@ -75,7 +77,10 @@ const Categorie = (props) => {
                         <br />
                         <h4 className="main__left-title">Price</h4>
                         <div className="main__left-list">
-                            <span data-range="all" className="main__left-item">
+                            <span
+                                data-range="all"
+                                className="main__left-item"
+                                onClick={() => dispatch(getProductNew(products))}>
                                 Any
                             </span>
                             <span
@@ -99,50 +104,13 @@ const Categorie = (props) => {
                         </div>
                         <h4 className="main__left-title">Avg. Customer Review</h4>
                         <div className="main__left-list">
-                            <a href="/" className="main__left-item">
-                                <div>
-                                    <span>
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star-o"></i> & up
-                                    </span>
-                                </div>
-                            </a>
-                            <a href="/" className="main__left-item">
-                                <div>
-                                    <span>
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star-o"></i>
-                                        <i className="fa fa-star-o"></i> & up
-                                    </span>
-                                </div>
-                            </a>
-                            <a href="/" className="main__left-item">
-                                <div>
-                                    <span>
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star-o"></i>
-                                        <i className="fa fa-star-o"></i>
-                                        <i className="fa fa-star-o"></i> & up
-                                    </span>
-                                </div>
-                            </a>
-                            <a href="/" className="main__left-item">
-                                <div>
-                                    <span>
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star-o"></i>
-                                        <i className="fa fa-star-o"></i>
-                                        <i className="fa fa-star-o"></i>
-                                        <i className="fa fa-star-o"></i> & up
-                                    </span>
-                                </div>
-                            </a>
+                            {[...new Set(products.map(el => el.rating))].map(rating => (
+                                <RatingFilter
+                                    rating={rating}
+                                    filterByRating={filterByRating}
+                                    key={rating}
+                                />
+                            ))}
                         </div>
                     </div>
                     <div className="main__right">

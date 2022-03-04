@@ -2,17 +2,17 @@
 import React, {useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import fecthProducts from '../redux/product/action';
+//import fecthProducts from '../redux/product/action';
 import Rating from '../components/Rating';
 
-const Home = (props) => {
+const Home = ({products}) => {
 
-    const { products } = props.products;
+    //const { products } = props.products;
     console.log("products:", products);
 
-    useEffect(() => {
-        props.getproducts()
-    }, [])
+    // useEffect(() => {
+    //     props.getproducts()
+    // }, [])
 
     return (
         <div className="products">
@@ -41,11 +41,11 @@ const Home = (props) => {
 };
 
 const mapStateToProps = state => ({
-    products : state.products
+    products : state.products.products
 })
 
-const mapDispatchToProps = dispatch => ({
-    getproducts: () => dispatch(fecthProducts())
-})
+// const mapDispatchToProps = dispatch => ({
+//     getproducts: () => dispatch(fecthProducts())
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps) (Home)
+export default connect(mapStateToProps, null) (Home)

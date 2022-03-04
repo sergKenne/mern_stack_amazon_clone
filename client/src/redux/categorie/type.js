@@ -7,4 +7,5 @@ export const SORT_NEW = "SORT_NEW"
 export const SORT_BY_PRICE_1_10 = 'SORT_BY_PRICE_1_10'
 export const SORT_BY_PRICE_10_100 = 'SORT_BY_PRICE_10_100'
 export const SORT_BY_PRICE_100_1000 = 'SORT_BY_PRICE_100_1000'
+export const FILTER_BY_RATING = 'FILTER_BY_RATING'
 

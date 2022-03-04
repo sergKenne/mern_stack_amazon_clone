@@ -5,15 +5,14 @@ import { getProductByCategorie } from '../redux/categorie/action';
 
 
 const Modal = ({ setSideToggle, sideToggle }) => {
-    //const { products } = useSelector((state) => state.products)
-    let products = JSON.parse(localStorage.getItem('products'));
+    const { products } = useSelector((state) => state.products)
     const dispatch = useDispatch()
 
     const filterByCategory = (cat) => {
         setSideToggle(false);
         dispatch(getProductByCategorie(cat)) 
-
     }
+    
   return (
       <div className={sideToggle ? 'modal toggle' : 'modal'}>
           <div className="modal__content">

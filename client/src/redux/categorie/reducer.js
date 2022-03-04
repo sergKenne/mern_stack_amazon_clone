@@ -1,5 +1,5 @@
 /* eslint-disable default-case */
-import { SORT_ASC, SORT_BY_PRICE_100_1000, SORT_BY_PRICE_10_100, SORT_BY_PRICE_1_10, SORT_DESC, SORT_NEW } from "../categorie/type";
+import { FILTER_BY_RATING, SORT_ASC, SORT_BY_PRICE_100_1000, SORT_BY_PRICE_10_100, SORT_BY_PRICE_1_10, SORT_DESC, SORT_NEW } from "../categorie/type";
 import { PRODUCT_CATEGORIE_ERROR, PRODUCT_CATEGORIE_REQUEST, PRODUCT_CATEGORIE_SUCCESS } from "./type"
 
 const initialState = {
@@ -62,6 +62,12 @@ const categorieReducer = (state = initialState, action) => {
                 ...state,
                 categorie: action.payload,
             };
+        //FILTER BY RATING
+        case FILTER_BY_RATING: 
+            return {
+                ...state,
+                categorie: action.payload
+            }
         
         default:
             return state;

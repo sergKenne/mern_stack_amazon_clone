@@ -7,10 +7,12 @@ app.use(express.json())
 
 const connectDB = require('./db.js')
 const productRouter = require('./routes/product')
+const userRouter = require('./routes/user')
 
 connectDB()
 
 app.use("/api/products", productRouter)
+app.use("/api", userRouter )
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log('server running in port 5000');
