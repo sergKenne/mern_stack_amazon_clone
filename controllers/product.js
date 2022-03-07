@@ -3,6 +3,8 @@ const Product = require("../models/product")
 
 const getProducts = async (req, res) => {
 
+    console.log("req.user:", req.user);
+
     try {
         const products = await Product.find({})
         if (!products) {

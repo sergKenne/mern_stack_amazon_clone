@@ -1,23 +1,34 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-//import fecthProducts from '../redux/product/action';
+import Pagination from '../components/Pagination';
+import Loading from '../components/Loading';
 import Rating from '../components/Rating';
+import ErrorMessage from '../components/ErrorMessage';
 
 const Home = ({products}) => {
+    
+    const { loading, products: productsList, error } = products;
 
-    //const { products } = props.products;
-    console.log("products:", products);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [productsPerPage] = useState(8);
 
-    // useEffect(() => {
-    //     props.getproducts()
-    // }, [])
+    // Get current posts
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = productsList.slice(indexOfFirstProduct, indexOfLastProduct);
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    return (
-        <div className="products">
-            {products.length > 0 &&
-                products.map((prod) => (
+    return loading ? (
+        <Loading />
+    ) : error ? (
+        <ErrorMessage error={error} />
+    ) : (
+        <>
+            <div className="products">
+                {currentProducts.map((prod) => (
                     <div className="card products__item" key={prod._id}>
                         <Link to={`product/${prod._id}`}>
                             <img src={prod.image} className="card__img-top" alt="man" />
@@ -36,16 +47,19 @@ const Home = ({products}) => {
                         </div>
                     </div>
                 ))}
-        </div>
+            </div>
+            <Pagination
+                productsPerPage={productsPerPage}
+                totalProducts={productsList.length}
+                paginate={paginate}
+                currentPage={currentPage}
+            />
+        </>
     );
 };
 
 const mapStateToProps = state => ({
-    products : state.products.products
+    products : state.products
 })
-
-// const mapDispatchToProps = dispatch => ({
-//     getproducts: () => dispatch(fecthProducts())
-// })
 
 export default connect(mapStateToProps, null) (Home)

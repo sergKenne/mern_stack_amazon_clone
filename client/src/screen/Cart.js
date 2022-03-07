@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { deleteToCart } from '../redux/carts/action';
 import { GET_TOTAL_ITEMS, GET_TOTAL_PRICE } from '../redux/carts/type';
 import { addToCart } from '../redux/carts/action';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
 
@@ -23,13 +24,17 @@ const Cart = () => {
                   {cart.map((item) => (
                       <div className="shop-cart__item" key={item._id}>
                           <img src={item.image} alt="" className="shop-cart__img" />
-                          <p className="shop-cart__description">{item.name}</p>
+                          <p className="shop-cart__description">
+                              <Link to={`/product/${item._id}`}>
+                                  {item.name}
+                              </Link>
+                          </p>
                           {item.countInStock && (
                               <select
                                   className="detail__select"
                                   onChange={(e) => {
-                                      setQty(e.target.value)
-                                      dispatch(addToCart(item, Number(e.target.value)))
+                                      setQty(e.target.value);
+                                      dispatch(addToCart(item, Number(e.target.value)));
                                   }}>
                                   <option value={item.qty} disabled selected hidden>
                                       {item.qty}

@@ -11,6 +11,7 @@ import {
     getProductByCategorie,
     getProductDesc,
     getProductNew,
+    getProductAvg,
     sortByPrice,
 } from '../redux/categorie/action';
 
@@ -30,6 +31,9 @@ const Categorie = (props) => {
                 break;
             case 'new':
                 dispatch(getProductNew(products));
+                break
+            case 'avg':
+                dispatch(getProductAvg(categorie));
         }
     };
 
@@ -54,7 +58,7 @@ const Categorie = (props) => {
                         <option value="new">Newest Arrivals</option>
                         <option value="desc">Price: High to Low</option>
                         <option value="asc">Price: Low to High</option>
-                        <option value="new">Avg. Cbstomer Reviews</option>
+                        <option value="avg">Avg. Customer Reviews</option>
                     </select>
                 </div>
             </div>
@@ -104,7 +108,7 @@ const Categorie = (props) => {
                         </div>
                         <h4 className="main__left-title">Avg. Customer Review</h4>
                         <div className="main__left-list">
-                            {[...new Set(products.map(el => el.rating))].map(rating => (
+                            {[...new Set(products.map((el) => el.rating))].sort((a,b) => a-b).map((rating) => (
                                 <RatingFilter
                                     rating={rating}
                                     filterByRating={filterByRating}

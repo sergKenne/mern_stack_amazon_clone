@@ -1,6 +1,15 @@
 import axios from "axios"
 import { PRODUCT_DETAIL_ERROR } from "../detail/type"
-import { FILTER_BY_RATING, SORT_ASC, SORT_BY_PRICE_100_1000, SORT_BY_PRICE_10_100, SORT_BY_PRICE_1_10, SORT_DESC, SORT_NEW } from "../categorie/type"
+import {
+    FILTER_BY_RATING,
+    SORT_ASC,
+    SORT_BY_PRICE_100_1000,
+    SORT_BY_PRICE_10_100,
+    SORT_BY_PRICE_1_10,
+    SORT_DESC,
+    SORT_NEW,
+    SORT_AVG,
+} from '../categorie/type';
 import { PRODUCT_CATEGORIE_REQUEST, PRODUCT_CATEGORIE_SUCCESS } from "./type"
 
 export const getProductByCategorie = (category) => async (dispatch) => {
@@ -37,6 +46,13 @@ export const getProductNew = (prod) => (dispath, getState) => {
     })
 };
 
+export const getProductAvg = (prod) => (dispath, getState) => {
+    dispath({
+        type: SORT_AVG,
+        payload: prod.sort((a,b) => a.rating - b.rating),
+    });
+};
+
 export const sortByPrice = (range) => (dispatch, getState) => {
     const min = Number(range.split("-")[0]) 
     const max = Number(range.split('-')[1]);
@@ -70,6 +86,7 @@ export const sortByPrice = (range) => (dispatch, getState) => {
 }
 
 export const filterByRating = (rating) => (dispatch, getState) => {
+    
     const items = getState().products.products.filter(elt => elt.rating >= rating )
     dispatch({
         type: FILTER_BY_RATING,

@@ -6,7 +6,7 @@ const fecthProducts = () => async (dispatch) => {
     dispatch({ type: PRODUCT_LIST_REQUEST })
     try {
         const { data } = await axios.get("/api/products")
-        localStorage.setItem("products", JSON.stringify(data))
+        //localStorage.setItem("products", JSON.stringify(data))
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
             payload: data

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { connect } from 'react-redux'
+import Loading from '../components/Loading';
+import ErrorMessage from '../components/ErrorMessage';
 
 import fecthDetailProduct from '../redux/detail/action';
 import Rating from '../components/Rating';
@@ -27,9 +29,15 @@ const Detail = (props) => {
         navigate("/cart")
     }
 
-    return (
+    return loading ? (
+        <Loading />
+    ) : error ? (
+        <ErrorMessage error={error} />
+    ) : (
         <div className="detail">
-            <Link className="detail__go-back" to="/">Back to result</Link>
+            <Link className="detail__go-back" to="/">
+                Back to result
+            </Link>
             <div className="detail__content">
                 <div className="detail__picture">
                     <img className="detail__img" src={product.image} alt="" />
@@ -50,7 +58,7 @@ const Detail = (props) => {
                     </div>
                     <div className="detail__item detail__item--flex">
                         <span>Price</span>
-                        <span>${product.price*qty}</span>
+                        <span>${product.price * qty}</span>
                     </div>
                     <div className="detail__item detail__item--flex">
                         <span>Status</span>

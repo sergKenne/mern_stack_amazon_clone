@@ -13,8 +13,9 @@ import fecthProducts from './redux/product/action';
 import SignIn from './screen/SignIn';
 import SignUp from './screen/SignUp';
 
-function App({ getproducts }) {
+function App({ getproducts}) {
     const [sideToggle, setSideToggle] = useState(false);
+    
 
     useEffect(() => {
         getproducts();
@@ -26,7 +27,7 @@ function App({ getproducts }) {
             <div className="main">
                 <div className="container">
                     <Routes>
-                        <Route exact path="/" element={<Home />} />
+                        <Route exact path="/" element={<Home/>} />
                         <Route path="product/:id" element={<Detail />} />
                         <Route path="/search/categorie/:name" element={<Categorie />} />
                         <Route path="/cart" element={<Cart />} />
@@ -45,5 +46,6 @@ function App({ getproducts }) {
 const mapDispatchToProps = (dispatch) => ({
     getproducts: () => dispatch(fecthProducts()),
 });
+
 
 export default connect(null, mapDispatchToProps) (App);
