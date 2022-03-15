@@ -1,12 +1,17 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import jwtDecode from 'jwt-decode';
 import { useSelector } from 'react-redux';
 
 import logo from "../img/logo.png"
 import navLogo from "../img/nav.jpg"
 
-const Header = ({ setSideToggle }) => {
-
+const Header = ({ setSideToggle, handleSearch, search }) => {
+    const token = localStorage.getItem("token")
+    if (token) {
+        var decode = jwtDecode(token);
+    }
+    
     const {cart} = useSelector(state => state.cart) 
 
     return (
@@ -22,25 +27,49 @@ const Header = ({ setSideToggle }) => {
                                 type="text"
                                 className="header__input"
                                 placeholder="Search Your Products"
+                                value={search}
+                                onChange={handleSearch}
                             />
                             <button className="header__submit">
                                 <i className="fa fa-search"></i>
                             </button>
                         </form>
                         <ul className="header__right">
-                            <li className="header__icons">
-                                <Link to="/signin" className="header__sign active">
-                                    sign in
-                                </Link>
-                            </li>
+                            {token ? (
+                                <li
+                                    className="header__icons"
+                                    onClick={() =>{
+                                        localStorage.removeItem("token");
+                                        window.location.reload()
+                                    } }
+                                >
+                                    <Link to="/" className="header__sign active">Logout</Link>
+                                </li>
+                            ) : (
+                                <>
+                                    <li className="header__icons">
+                                        <Link to="/signin" className="header__sign active">
+                                            sign in
+                                        </Link>
+                                    </li>
+                                    <li className="header__icons">
+                                        <Link to="/signup" className="header__sign active">
+                                            sign up
+                                        </Link>
+                                    </li>
+                                </>
+                            )}
                             <li className="header__icons">
                                 <NavLink to="/cart" className="header__cart active">
                                     <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                                     <span className="header__cart-text">Card</span>
-                                    <span className="header__cart-badge">{ cart.length}</span>
+                                    <span className="header__cart-badge">{cart.length}</span>
                                 </NavLink>
                             </li>
-                            <li className="header__icons header__icons--avatar">S</li>
+                            { token && <li className="header__icons header__icons--avatar">
+                                <span className="header__icon-profile">{decode.name.slice(0,1) }</span>
+                                <span style={{textTransform: "capitalize"}}>Welcome { decode.name}</span>
+                            </li>}
                         </ul>
                     </div>
                 </div>
@@ -52,24 +81,6 @@ const Header = ({ setSideToggle }) => {
                 </span>
                 {/* <a href="/" className="nav__link">
                     mobiles
-                </a>
-                <a href="/" className="nav__link">
-                    best sellers
-                </a>
-                <a href="/" className="nav__link">
-                    fashion
-                </a>
-                <a href="/" className="nav__link">
-                    customer service
-                </a>
-                <a href="/" className="nav__link">
-                    electronics
-                </a>
-                <a href="/" className="nav__link">
-                    prime
-                </a>
-                <a href="/" className="nav__link">
-                    today's deals
                 </a>
                 <a href="/" className="nav__link">
                     amazon play

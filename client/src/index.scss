@@ -131,21 +131,24 @@ a {
     &__icons {
         margin-left: 14px;
         &--avatar {
-            font-size: 1.25rem;
-            color: #fff;
-            text-transform: capitalize;
-            cursor: pointer;
-            //background-color: #1365cf;
-            background-color: #f02020;
-            height: 40px;
-            width: 40px;
+            color: #ffffff;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            border-radius: 50%;
         }
-
-
+    }
+     &__icon-profile {
+        font-size: .8rem;
+        color: #fff;
+        text-transform: capitalize;
+        cursor: pointer;
+        background-color: #3e4fe2;
+        height: 20px;
+        width: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
     }
     &__sign {
         color: #fff;
@@ -160,7 +163,7 @@ a {
         // }
         &:hover {
             border-color: #fff;
-            color: #f02020;
+            //color: #f02020;
         }
     }
     &__cart {
@@ -414,7 +417,7 @@ a {
         background-color: #f8f8f8;
         border-radius: 0.5rem;
         padding: 16px;
-        height: 270px;
+        height: 282px;
         @media  (max-width: 920px){
            margin-top: 30px; 
         }
@@ -616,6 +619,7 @@ a {
         //background-color: #f8f8f8!important;
     }
     &__btn {
+        cursor: pointer;
         background-color: #f0c040;
         text-align: center;
         width: 100%;

@@ -15,7 +15,11 @@ const Pagination = ({ productsPerPage, totalProducts, paginate, currentPage }) =
                         key={number}
                         className="pagination__item"
                         onClick={() => paginate(number)}
-                        style={number === currentPage ? { backgroundColor: '#f02020', color: "#ffffff" } : {}}>
+                        style={
+                            number === currentPage
+                                ? { backgroundColor: 'silver', color: '#ffffff' }
+                                : {}
+                        }>
                         <span className="pagination__link">{number}</span>
                     </li>
                 ))}

@@ -6,7 +6,7 @@ import { addToCart } from '../redux/carts/action';
 import { Link } from 'react-router-dom';
 
 const Cart = () => {
-
+    const token = localStorage.getItem('token');
     const [qty, setQty] = useState(null);
     const { cart, total, totalItems } = useSelector(state => state.cart)
     const dispatch = useDispatch()
@@ -62,7 +62,9 @@ const Cart = () => {
                       <h4 className="detail__title">
                           subtotal({totalItems} item): ${total}
                       </h4>
-                      <button className="detail__btn">Proceed to Checkout</button>
+                      <Link to={token ? "/shipping" : "/signin"} >
+                          <button className="detail__btn">Proceed to Checkout</button>
+                      </Link>
                   </div>
               </div>
           </div>

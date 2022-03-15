@@ -16,38 +16,21 @@ const SignIn = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const {email, password} = inputs;
-        axios
-            .post(
-                '/api/signin',
-                {
-                    email,
-                    password,
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        //Authorization: 'Bearer ' + this.$gate.token(),
-                    },
-                },
-            )
-            .then((res) => {
-                console.log(res.data);
-
-                setInputs({
-                    email: '',
-                    password: '',
-                });
-                
-            })
-            .catch((e) => {
-                console.log(e.message)
-                setErrorMsg("Email or Password is not correct please try again...")
-            });
+        const { email, password } = inputs;
+        try {
+            const { data } = await axios.post('/api/signin', { email, password });
+            localStorage.setItem("token", data.token)
+            setErrorMsg(data.msg)
+            setTimeout(() => {
+                setErrorMsg("")
+                window.location.replace("/")
+            },2000)
+        } catch (err) {
+            console.log(err.message);
+        }
     };
-
 
   return (
       <div className="sign">
@@ -78,7 +61,7 @@ const SignIn = () => {
               </div>
               <button className="sign__btn">Sign In</button>
               <p className="sign__text">
-                  New customer?<Link to="/signup">Create your account</Link>
+                 <strong>New customer ?</strong> <Link to="/signup">Create your account</Link>
               </p>
           </form>
       </div>

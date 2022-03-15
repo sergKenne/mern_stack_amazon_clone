@@ -7,17 +7,23 @@ import Loading from '../components/Loading';
 import Rating from '../components/Rating';
 import ErrorMessage from '../components/ErrorMessage';
 
-const Home = ({products}) => {
-    
+const Home = ({products, search}) => {
+    console.log("search:", search);
     const { loading, products: productsList, error } = products;
+    // const [searchProducts, setSearchProducts] = useState([])
 
+    const productsFilter = productsList.filter((prod) =>
+        prod.name.toLowerCase().includes(search.toLowerCase()),
+    );
+    
+    
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(8);
 
-    // Get current posts
+    // Get current products
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = productsList.slice(indexOfFirstProduct, indexOfLastProduct);
+    const currentProducts = productsFilter.slice(indexOfFirstProduct, indexOfLastProduct);
     // Change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 

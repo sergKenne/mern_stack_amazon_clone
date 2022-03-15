@@ -3,6 +3,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import ErrorMessage from '../components/ErrorMessage';
+import Loading from '../components/Loading';
 import Rating from '../components/Rating';
 import RatingFilter from '../components/RatingFilter';
 import {
@@ -20,6 +22,10 @@ const Categorie = (props) => {
     const { products } = useSelector((state) => state.products);
     const dispatch = useDispatch();
     const { name } = useParams();
+
+    const categorieFilter = categorie.filter((prod) =>
+        prod.name.toLowerCase().includes(props.search.toLowerCase()),
+    );
     
     const sortByCategory = (sortName) => {
         switch (sortName) {
@@ -108,40 +114,45 @@ const Categorie = (props) => {
                         </div>
                         <h4 className="main__left-title">Avg. Customer Review</h4>
                         <div className="main__left-list">
-                            {[...new Set(products.map((el) => el.rating))].sort((a,b) => a-b).map((rating) => (
-                                <RatingFilter
-                                    rating={rating}
-                                    filterByRating={filterByRating}
-                                    key={rating}
-                                />
-                            ))}
+                            {[...new Set(products.map((el) => el.rating))]
+                                .sort((a, b) => a - b)
+                                .map((rating) => (
+                                    <RatingFilter
+                                        rating={rating}
+                                        filterByRating={filterByRating}
+                                        key={rating}
+                                    />
+                                ))}
                         </div>
                     </div>
                     <div className="main__right">
-                        <div className="products">
-                            {categorie.map((prod) => (
+                        {loading ? <Loading /> : error ? <ErrorMessage error={error} /> : (
+                           <div className="products">
+                            {categorieFilter.map((prod) => (
                                 <div className="card products__item" key={prod._id}>
-                                    <Link to={`/product/${prod._id}`} className="card__title">
-                                        <img src={prod.image} className="card__img-top" alt="man" />
-                                    </Link>
-                                    <div className="card__body">
                                         <Link to={`/product/${prod._id}`} className="card__title">
-                                            {prod.name}
+                                            <img src={prod.image} className="card__img-top" alt="man" />
                                         </Link>
-                                        <div className="card__review">
-                                            <Rating
-                                                rating={prod.rating}
-                                                numReviews={prod.numReviews}
-                                            />
-                                        </div>
-                                        <div className="card__footer">
-                                            <span className="card__price">$ {prod.price}</span>
-                                            <span className="card__brand">{prod.brand}</span>
+                                        <div className="card__body">
+                                            <Link to={`/product/${prod._id}`} className="card__title">
+                                                {prod.name}
+                                            </Link>
+                                            <div className="card__review">
+                                                <Rating
+                                                    rating={prod.rating}
+                                                    numReviews={prod.numReviews}
+                                                />
+                                            </div>
+                                            <div className="card__footer">
+                                                <span className="card__price">$ {prod.price}</span>
+                                                <span className="card__brand">{prod.brand}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div> 
+                        )}
+                        
                     </div>
                 </div>
             </div>

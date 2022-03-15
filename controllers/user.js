@@ -8,12 +8,14 @@ require('dotenv').config()
 const userRegister = async (req, res) => {
     const {name, email, password, password2 } = req.body
     const userExist = await User.findOne({ email })
+    console.log("userExist:", userExist);
     if (userExist) {
         return res.status(401).json({
             success: false,
             message: "user already exist!"
         })
     }
+
     if (password === password2) {
         const salt = bcrypt.genSaltSync(10);
         const hashPassword = bcrypt.hashSync(password, salt);
@@ -24,11 +26,20 @@ const userRegister = async (req, res) => {
             password: hashPassword,
             password2: hashPassword,
         });
-        await user.save()
-        res.status(200).json({
-            success: true,
-            message: "user has been add successfully"
-        })
+
+        try {
+            await user.save();
+            res.status(200).json({
+                success: true,
+                message: 'user has been add successfully',
+            });
+        } catch (error) {
+            res.state(401).json({
+                success: false,
+                message: error.message
+            })
+        }
+        
     } else {
         return res.json(" please check the password ")
     }
@@ -52,12 +63,16 @@ const userSignIn = async (req, res) => {
                 message: "password is not correct"
             })
         }
-        const token = jwt.sign({ _id: user._id, email: user.email }, process.env.SECRET_KEY)
-        res.json({
-            success: true,
-            user: user,
-            token
-        })
+        const token = jwt.sign({ _id: user._id, email: user.email, name: user.name }, process.env.SECRET_KEY)
+        if (token) {
+            //localStorage.setItem("token",token)
+            res.json({
+                success: true,
+                user: user,
+                msg:"user login successfully",
+                token
+            })
+        }
     });
 }
 

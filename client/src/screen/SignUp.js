@@ -11,6 +11,8 @@ const SignUp = () => {
         password2: ""
     })
 
+    console.log("inputs:", inputs);
+
     const handleChange = (e) => {
         setInputs((state) => ({
             ...state,
@@ -18,47 +20,23 @@ const SignUp = () => {
         }));
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault()
         const { name, email, password, password2 } = inputs
-        if (!name || !email || !password || !password2) {
-            setErrorMsg("All field is required")
-        } else if (password !== password2) {
-            setErrorMsg('The confirm password and password is not matching');
-        } else {
-            axios
-                .post(
-                    '/api/register',
-                    {
-                        name,
-                        email,
-                        password,
-                        password2,
-                    },
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            //Authorization: 'Bearer ' + token,
-                        },
-                    },
-                )
-                .then((res) => {
-                    setInputs({
-                        name: '',
-                        email: '',
-                        password: '',
-                        password2: '',
-                    });
-                    setErrorMsg('User added successfully');
-                    window.location="/signin"
-                    console.log(res.data);
-                })
-                .catch((e) => {
-                    console.log(e.message)
-                    setErrorMsg("User already exist please try another email")
-                 });
+        // if (!name || !email || !password || !password2) {
+        //     setErrorMsg("All field is required")
+        //     return
+        // } else if (password !== password2) {
+        //     setErrorMsg('The confirm password and password is not matching');
+        //     return
+        // } 
+
+        try {
+            const { data } = await axios.post('/api/register', { name, email, password, password2 });
+            console.log('data:', data);
+        } catch (err) {
+            console.log(err.message);
         }
-        
 
     }
 
@@ -114,7 +92,7 @@ const SignUp = () => {
               </div>
               <button className="sign__btn">Register</button>
               <p className="sign__text">
-                  lready have an account?<Link to="/signin"> Sign-In</Link>
+                 <strong>I ready have an account ? </strong> <Link to="/signin"> Sign-In</Link>
               </p>
           </form>
       </div>
