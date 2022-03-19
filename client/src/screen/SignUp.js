@@ -22,14 +22,7 @@ const SignUp = () => {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-        const { name, email, password, password2 } = inputs
-        // if (!name || !email || !password || !password2) {
-        //     setErrorMsg("All field is required")
-        //     return
-        // } else if (password !== password2) {
-        //     setErrorMsg('The confirm password and password is not matching');
-        //     return
-        // } 
+        const { name, email, password, password2 } = inputs 
 
         try {
             const { data } = await axios.post('/api/register', { name, email, password, password2 });
@@ -39,7 +32,6 @@ const SignUp = () => {
         }
 
     }
-
 
   return (
       <div className="sign">

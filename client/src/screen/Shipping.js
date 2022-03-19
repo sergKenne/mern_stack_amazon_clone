@@ -1,9 +1,6 @@
-import axios from 'axios';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 const Shipping = () => {
-    const [errorMsg, setErrorMsg] = useState('');
     const [inputs, setInputs] = useState({
         country: '',
         postal: '',
@@ -29,7 +26,6 @@ const Shipping = () => {
         <div className="sign">
             <form action="" className="sign__form" onSubmit={handleSubmit}>
                 <h3 className="sign__title">Shipping Address</h3>
-                <div className="sign__alert">{errorMsg}</div>
                 <div className="sign__group">
                     <label className="sign__label">Full Name</label>
                     <input
@@ -97,9 +93,6 @@ const Shipping = () => {
                     />
                 </div>
                 <button className="sign__btn" disabled>Continue</button>
-                {/* <p className="sign__text">
-                    lready have an account?<Link to="/signin"> Sign-In</Link>
-                </p> */}
             </form>
         </div>
     );

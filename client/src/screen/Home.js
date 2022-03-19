@@ -8,9 +8,7 @@ import Rating from '../components/Rating';
 import ErrorMessage from '../components/ErrorMessage';
 
 const Home = ({products, search}) => {
-    console.log("search:", search);
     const { loading, products: productsList, error } = products;
-    // const [searchProducts, setSearchProducts] = useState([])
 
     const productsFilter = productsList.filter((prod) =>
         prod.name.toLowerCase().includes(search.toLowerCase()),
