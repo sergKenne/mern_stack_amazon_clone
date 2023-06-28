@@ -16,6 +16,7 @@ const Pagination = ({ productsPerPage, totalProducts, paginate, currentPage }) =
                         className="pagination__item"
                         onClick={() => paginate(number)}
                         style={
+                            // eslint-disable-next-line eqeqeq
                             number === currentPage || number == localStorage.getItem('currentPage')
                                 ? { backgroundColor: 'silver', color: '#ffffff' }
                                 : {}

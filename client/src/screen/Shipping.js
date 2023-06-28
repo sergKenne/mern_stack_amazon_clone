@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const Shipping = () => {
+    // eslint-disable-next-line no-unused-vars
     const [inputs, setInputs] = useState({
         country: '',
         postal: '',

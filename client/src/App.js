@@ -15,7 +15,7 @@ import SignUp from './screen/SignUp';
 import Shipping from './screen/Shipping';
 
 function App({ getproducts }) {
-    const token = localStorage.getItem('token');
+    //const token = localStorage.getItem('token');
     const [sideToggle, setSideToggle] = useState(false);
     const [search, setSearch] = useState("")
 
@@ -25,7 +25,7 @@ function App({ getproducts }) {
     
     useEffect(() => {
         getproducts();
-    }, []);
+    }, [getproducts]);
 
     return (
         <div className="wrapper">
