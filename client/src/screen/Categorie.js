@@ -69,7 +69,7 @@ const Categorie = (props) => {
                 </div>
             </div>
             <div className="main__content">
-                <div className="main__content-wrap">
+                <div className="main__content-wrap main__content-wrap--filter">
                     <div className="main__left">
                         <h4 className="main__left-title">Department</h4>
                         <div className="main__left-list">
@@ -126,15 +126,25 @@ const Categorie = (props) => {
                         </div>
                     </div>
                     <div className="main__right">
-                        {loading ? <Loading /> : error ? <ErrorMessage error={error} /> : (
-                           <div className="products">
-                            {categorieFilter.map((prod) => (
-                                <div className="card products__item" key={prod._id}>
+                        {loading ? (
+                            <Loading />
+                        ) : error ? (
+                            <ErrorMessage error={error} />
+                        ) : (
+                            <div className="products products--filter">
+                                {categorieFilter.map((prod) => (
+                                    <div className="card products__item" key={prod._id}>
                                         <Link to={`/product/${prod._id}`} className="card__title">
-                                            <img src={prod.image} className="card__img-top" alt="man" />
+                                            <img
+                                                src={prod.image}
+                                                className="card__img-top"
+                                                alt="man"
+                                            />
                                         </Link>
                                         <div className="card__body">
-                                            <Link to={`/product/${prod._id}`} className="card__title">
+                                            <Link
+                                                to={`/product/${prod._id}`}
+                                                className="card__title">
                                                 {prod.name}
                                             </Link>
                                             <div className="card__review">
@@ -150,9 +160,8 @@ const Categorie = (props) => {
                                         </div>
                                     </div>
                                 ))}
-                            </div> 
+                            </div>
                         )}
-                        
                     </div>
                 </div>
             </div>

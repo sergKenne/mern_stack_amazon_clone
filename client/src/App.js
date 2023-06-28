@@ -19,13 +19,10 @@ function App({ getproducts }) {
     const [sideToggle, setSideToggle] = useState(false);
     const [search, setSearch] = useState("")
 
-    //const user = false
-
     const handleSearch = (e) => {
         setSearch(e.target.value)
     }
     
-
     useEffect(() => {
         getproducts();
     }, []);
@@ -59,6 +56,5 @@ function App({ getproducts }) {
 const mapDispatchToProps = (dispatch) => ({
     getproducts: () => dispatch(fecthProducts()),
 });
-
 
 export default connect(null, mapDispatchToProps) (App);

@@ -15,7 +15,7 @@ const Home = ({products, search}) => {
     );
     
     
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState( null);
     const [productsPerPage] = useState(8);
 
     // Get current products
@@ -23,7 +23,21 @@ const Home = ({products, search}) => {
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = productsFilter.slice(indexOfFirstProduct, indexOfLastProduct);
     // Change page
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        localStorage.setItem('currentPage', pageNumber);
+
+        console.log(localStorage.getItem('currentPage'));
+    }
+
+    useEffect(() => {
+        if (localStorage.getItem('currentPage')) {
+            setCurrentPage(localStorage.getItem('currentPage'))
+        } else {
+            localStorage.setItem('currentPage', 1);
+            setCurrentPage(localStorage.getItem('currentPage'));
+        } 
+    }, [])
 
     return loading ? (
         <Loading />

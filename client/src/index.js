@@ -6,7 +6,6 @@ import store from './redux/store'
 import './index.scss';
 import App from './App';
 
-
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
@@ -15,4 +14,3 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById('root')
 );
-

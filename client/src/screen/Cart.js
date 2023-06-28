@@ -16,7 +16,7 @@ const Cart = () => {
         dispatch({ type: GET_TOTAL_ITEMS });
     }, [dispatch,cart, qty]);
     
-  return (
+  return cart.length ? (
       <>
           <h3 className="main__title">shopping card</h3>
           <div className="shop-cart">
@@ -25,9 +25,7 @@ const Cart = () => {
                       <div className="shop-cart__item" key={item._id}>
                           <img src={item.image} alt="" className="shop-cart__img" />
                           <p className="shop-cart__description">
-                              <Link to={`/product/${item._id}`}>
-                                  {item.name}
-                              </Link>
+                              <Link to={`/product/${item._id}`}>{item.name}</Link>
                           </p>
                           {item.countInStock && (
                               <select
@@ -62,11 +60,25 @@ const Cart = () => {
                       <h4 className="detail__title">
                           subtotal({totalItems} item): ${total}
                       </h4>
-                      <Link to={token ? "/shipping" : "/signin"} >
+                      <Link to={token ? '/shipping' : '/signin'}>
                           <button className="detail__btn">Proceed to Checkout</button>
                       </Link>
                   </div>
               </div>
+          </div>
+      </>
+  ) : (
+      <>
+          <Link to="/" className="detail__go-back">Return to Shop</Link>
+          <div
+              style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '25px',
+                  marginTop: '20px'
+              }}>
+              <h4>Your cart is currently empty</h4>
           </div>
       </>
   );
