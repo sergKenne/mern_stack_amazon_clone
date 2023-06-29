@@ -11,11 +11,13 @@ import {
     SORT_AVG,
 } from '../categorie/type';
 import { PRODUCT_CATEGORIE_REQUEST, PRODUCT_CATEGORIE_SUCCESS } from "./type"
+import { BASE_URL } from "../../helper";
 
 export const getProductByCategorie = (category) => async (dispatch) => {
     dispatch({ type: PRODUCT_CATEGORIE_REQUEST })
     try {
-        const { data } = await axios.get("/api/products")
+        //const { data } = await axios.get("/api/products")
+        const { data } = await axios.get(`${BASE_URL}/api/products`);
         if (category === "Any") {
             localStorage.setItem('productByCategory', JSON.stringify(data));
             dispatch({ type: PRODUCT_CATEGORIE_SUCCESS, payload: data }); 
