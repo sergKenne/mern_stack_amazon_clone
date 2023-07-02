@@ -7,7 +7,7 @@ const fecthProducts = () => async (dispatch) => {
     dispatch({ type: PRODUCT_LIST_REQUEST })
     try {
         //const { data } = await axios.get("/api/products")
-        const { data } = await axios.get(`${BASE_URL}/api/products`)
+        const { data } = await axios.get(`${BASE_URL}/api/products`); //for deployement
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
             payload: data,

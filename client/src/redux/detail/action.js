@@ -8,7 +8,7 @@ const fecthDetailProduct = (id) => async (dispatch) => {
     
     try {
         //const { data } = await axios.get(`/api/products/${id}`);
-        const { data } = await axios.get(`${BASE_URL}/api/products/${id}`);
+        const { data } = await axios.get(`${BASE_URL}/api/products/${id}`);  //for deployement
         console.log("data fetching", data);
         dispatch({
             type: PRODUCT_DETAIL_SUCCESS,
