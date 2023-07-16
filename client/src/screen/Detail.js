@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux'
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
@@ -9,12 +9,21 @@ import Rating from '../components/Rating';
 import { addToCart } from '../redux/carts/action';
 
 const Detail = (props) => {
+    const location = useLocation()
     const [qty, setQty] = useState(1)
     const { id } = useParams()
     const navigate = useNavigate()
     console.log("Qty:", qty);
     
-    const { error, product, loading } = props.product
+    const { error, product, loading } = props.product;
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+        });
+    }, [location]);
    
     useEffect(() => {
         props.getProductDetail(id)

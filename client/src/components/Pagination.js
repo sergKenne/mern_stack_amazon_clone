@@ -14,7 +14,14 @@ const Pagination = ({ productsPerPage, totalProducts, paginate, currentPage }) =
                     <li
                         key={number}
                         className="pagination__item"
-                        onClick={() => paginate(number)}
+                        onClick={() => {
+                            paginate(number);
+                             window.scrollTo({
+                                 top: 0,
+                                 left: 0,
+                                 behavior: 'smooth',
+                             });
+                        }}
                         style={
                             // eslint-disable-next-line eqeqeq
                             number === currentPage || number == localStorage.getItem('currentPage')
